@@ -1,8 +1,8 @@
 // 先攻のマーク
-const FIRST_MARK = 'o';
+const FIRST_MARK = '◯';
 
 // 後攻のマーク
-const NEXT_MARK = 'x';
+const NEXT_MARK = '✕';
 
 // ターン数
 let count = 1;
@@ -50,7 +50,7 @@ function judgeEnd() {
         isEnd = isWin(IDS[row][0], IDS[row][1], IDS[row][2]);
         if (isEnd) {
             displayResult($(IDS[row][0]).value + 'の勝ち!');
-            var win = ture;
+            // var win = ture;
             return true;
         }
     }
@@ -61,7 +61,7 @@ function judgeEnd() {
         isEnd = isWin(IDS[0][col], IDS[1][col], IDS[2][col]);
         if (isEnd) {
             displayResult($(IDS[0][col]).value + 'の勝ち!');
-            var win = ture;
+            // var win = ture;
             return true;
         }
     }
@@ -71,7 +71,7 @@ function judgeEnd() {
         isEnd = isWin(IDS[0][0], IDS[1][1], IDS[2][2]);
         if (isEnd) {
             displayResult($(IDS[0][0]).value + 'の勝ち!');
-            var win = ture;
+            // var win = ture;
             return true;
         }
 
@@ -81,7 +81,6 @@ function judgeEnd() {
          isEnd = isWin(IDS[0][2], IDS[1][1], IDS[2][0]);
          if (isEnd) {
              displayResult($(IDS[0][2]).value + 'の勝ち!');
-             var win = ture;
              return true;
          }
 
@@ -126,8 +125,8 @@ function displayResult(message) {
 // マスを選択するアクション
 function clickAction(event) {
     
-    if(win == false)
-{
+    // if(win == false)
+// {
     // イベントからクリックされたボタンのIDを取得する
     let id = event.target.id;
 
@@ -156,9 +155,9 @@ function clickAction(event) {
 
     // ターン表示を切り替える
     changeDisplayCount();
-}else {
-    console.log("else");
-}
+// }else {
+//     console.log("else");
+// }
 }
 
 // 画面を読み込んだ時の処理
