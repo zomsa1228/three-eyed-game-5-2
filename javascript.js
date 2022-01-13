@@ -31,9 +31,11 @@ function changeDisplayCount() {
     if (isFirstMove()) {
         // 先攻のターンを表示する
         $('display-count').innerHTML = FIRST_MARK + 'の番！';
-    } else {
+    } else if(count < 9) {
         // 後攻のターンを表示する
         $('display-count').innerHTML = NEXT_MARK + 'の番！';
+    } else {
+        $('display-count').innerHTML = "終了しました";
     }
 }
 
@@ -48,6 +50,7 @@ function judgeEnd() {
         isEnd = isWin(IDS[row][0], IDS[row][1], IDS[row][2]);
         if (isEnd) {
             displayResult($(IDS[row][0]).value + 'の勝ち!');
+            var win = ture;
             return true;
         }
     }
@@ -58,13 +61,29 @@ function judgeEnd() {
         isEnd = isWin(IDS[0][col], IDS[1][col], IDS[2][col]);
         if (isEnd) {
             displayResult($(IDS[0][col]).value + 'の勝ち!');
+            var win = ture;
             return true;
         }
     }
-
+    
     // 斜め3マスが同じマークかを判定する(右下がり)
+        // 勝敗を判定する
+        isEnd = isWin(IDS[0][0], IDS[1][1], IDS[2][2]);
+        if (isEnd) {
+            displayResult($(IDS[0][0]).value + 'の勝ち!');
+            var win = ture;
+            return true;
+        }
+
 
     // 斜め3マスが同じマークかを判定する(左下がり)
+         // 勝敗を判定する
+         isEnd = isWin(IDS[0][2], IDS[1][1], IDS[2][0]);
+         if (isEnd) {
+             displayResult($(IDS[0][2]).value + 'の勝ち!');
+             var win = ture;
+             return true;
+         }
 
     // ゲームが続行する場合はfalseを返す
     return false;
@@ -106,6 +125,9 @@ function displayResult(message) {
 
 // マスを選択するアクション
 function clickAction(event) {
+    
+    if(win == false)
+{
     // イベントからクリックされたボタンのIDを取得する
     let id = event.target.id;
 
@@ -134,6 +156,9 @@ function clickAction(event) {
 
     // ターン表示を切り替える
     changeDisplayCount();
+}else {
+    console.log("else");
+}
 }
 
 // 画面を読み込んだ時の処理
@@ -145,6 +170,10 @@ function onloadAction() {
         }
     }
 }
+
+function re_load() {  
+    document.location.reload()}
+
 
 // 画面読み込み時のイベントを設定
 window.onload = onloadAction;
