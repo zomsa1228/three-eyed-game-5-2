@@ -35,7 +35,7 @@ function changeDisplayCount() {
         // 後攻のターンを表示する
         $('display-count').innerHTML = NEXT_MARK + 'の番！';
     } else {
-        $('display-count').innerHTML = "終了しました";
+        $('display-count').innerHTML = "引き分けです";
     }
 }
 
@@ -50,7 +50,7 @@ function judgeEnd() {
         isEnd = isWin(IDS[row][0], IDS[row][1], IDS[row][2]);
         if (isEnd) {
             displayResult($(IDS[row][0]).value + 'の勝ち!');
-            // var win = ture;
+            document.getElementById("winner").value = 1
             return true;
         }
     }
@@ -61,7 +61,7 @@ function judgeEnd() {
         isEnd = isWin(IDS[0][col], IDS[1][col], IDS[2][col]);
         if (isEnd) {
             displayResult($(IDS[0][col]).value + 'の勝ち!');
-            // var win = ture;
+            document.getElementById("winner").value = 1
             return true;
         }
     }
@@ -71,7 +71,7 @@ function judgeEnd() {
         isEnd = isWin(IDS[0][0], IDS[1][1], IDS[2][2]);
         if (isEnd) {
             displayResult($(IDS[0][0]).value + 'の勝ち!');
-            // var win = ture;
+            document.getElementById("winner").value = 1
             return true;
         }
 
@@ -81,6 +81,7 @@ function judgeEnd() {
          isEnd = isWin(IDS[0][2], IDS[1][1], IDS[2][0]);
          if (isEnd) {
              displayResult($(IDS[0][2]).value + 'の勝ち!');
+             document.getElementById("winner").value = 1
              return true;
          }
 
@@ -125,39 +126,39 @@ function displayResult(message) {
 // マスを選択するアクション
 function clickAction(event) {
     
-    // if(win == false)
-// {
-    // イベントからクリックされたボタンのIDを取得する
-    let id = event.target.id;
+    var win = document.getElementById("winner").value;
+    Number(win);
 
-    // IDからオブジェクトを取得する
-    let object = $(id);
+    if (win == 1) {
+    
+        }else if(win == 0){
+        // イベントからクリックされたボタンのIDを取得する
+        let id = event.target.id;
 
-    // 既にマークが設定されている場合はスキップ
-    if (object.value !== '') {
-        return;
-    }
+        // IDからオブジェクトを取得する
+        let object = $(id);
 
-    // マス目にマークを設定する
-    if (isFirstMove()) {
-        object.value = FIRST_MARK;
-    } else {
-        object.value = NEXT_MARK;
-    }
-
-    // ゲーム終了を判定する
-    if (judgeEnd()) {
-        return;
-    }
-
+        // 既にマークが設定されている場合はスキップ
+        if (object.value !== '') {
+            return;
+        }
+        // マス目にマークを設定する
+        if (isFirstMove()) {
+            object.value = FIRST_MARK;
+        } else {
+            object.value = NEXT_MARK;
+        }
+        // ゲーム終了を判定する
+        if (judgeEnd()) {
+            return;
+        }
+    
     // ターンを+1する
     count = count + 1;
 
     // ターン表示を切り替える
     changeDisplayCount();
-// }else {
-//     console.log("else");
-// }
+    }
 }
 
 // 画面を読み込んだ時の処理
